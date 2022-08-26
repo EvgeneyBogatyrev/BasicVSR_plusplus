@@ -100,6 +100,12 @@ def restoration_video_inference(model,
             key=key,
             sequence_length=sequence_length)
 
+    print(test_pipeline)
+    for i in range(len(test_pipeline)):
+        if "start_idx" in test_pipeline[i]:
+            test_pipeline[i]["start_idx"] = 1
+        if "filename_tmpl" in test_pipeline[i]:
+            test_pipeline[i]["filename_tmpl"] = "frame{:04d}.png"
     # compose the pipeline
     test_pipeline = Compose(test_pipeline)
     data = test_pipeline(data)
